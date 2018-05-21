@@ -1,0 +1,152 @@
+﻿@model IEnumerable<TeknikServisYazılım.Entity.Suppliers>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<style>
+    #sellbutton {
+        width: 90px !important;
+    }
+</style>
+
+<div class="m-grid__item m-grid__item--fluid m-wrapper">
+    <!-- BEGIN: Subheader -->
+    <div class="m-subheader ">
+        <div class="d-flex align-items-center">
+            <div class="mr-auto">
+                <h3 class="m-subheader__title m-subheader__title--separator">
+                    Dış Servis
+                </h3>
+            </div>
+        </div>
+    </div>
+    <!-- END: Subheader -->
+    <div class="m-content">
+        <div class="m-alert m-alert--icon m-alert--air m-alert--square alert alert-dismissible m--margin-bottom-30" role="alert">
+            <div class="m-alert__icon">
+                <i class="flaticon-exclamation m--font-brand"></i>
+            </div>
+            <div class="m-alert__text">
+                Bu menüden Dış Servisleri listeleyebilir, düzenleyebilir ve yeni tedarikçi ekleyebilirsiniz.
+            </div>
+        </div>
+        <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+                <!--begin: Search Form -->
+                <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                    <div class="row align-items-center">
+                        <div class="col-xl-8 order-2 order-xl-1">
+                            <div class="form-group m-form__group row align-items-center">
+                                <div class="col-md-4">
+                                    <div class="m-input-icon m-input-icon--left">
+                                        <input type="text" class="form-control m-input" placeholder="Search..." id="generalSearch">
+                                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                                            <span>
+                                                <i class="la la-search"></i>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+
+                            <a href="/Supplier/Create" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
+                                <span>
+                                    <i class="la la-cart-plus"></i>
+                                    <span>
+                                        Dış Servis Ekle
+                                    </span>
+                                </span>
+                            </a>
+                            <div class="m-separator m-separator--dashed d-xl-none"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--end: Search Form -->
+                <!--begin: Datatable -->
+                <table class="m-datatable" id="html_table">
+                    <thead>
+                        <tr>
+                            <th>ADI</th>
+                            <th>TELEFON</th>
+                            <th>ADRES</th>
+                            <th>DÜZENLE</th>
+                            <th>DIŞ SERVİSE AİT ÖDEME LİSTESİ</th>
+                            <th>ÖDEME</th>
+                            <th>SİL</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var supplier in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => supplier.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => supplier.Phone)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => supplier.Address)
+                                </td>
+
+                                <td>
+                                    <a href="@Url.Action("Edit","Supplier", new { supplier.Id})" class="btn btn-outline-info btn-sm">
+                                        Düzenle
+                                    </a>
+
+                                </td>
+
+                                <td>
+                                    @if (supplier.Name == "CNH")
+                                    {
+                                        /**/
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("Index", "SupplierPayment", new { supplier.Id })" class="btn btn-primary btn-outline-info btn-sm">
+                                            Gelir-Gider
+                                        </a>
+                                    }
+                                </td>
+
+                                <td>
+                                    @if (supplier.Name == "CNH")
+                                    {
+                                        /**/
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("Create", "SupplierPayment", new { supplier.Id })" class="btn btn-success btn-outline-info btn-sm">
+                                            Ekle
+                                        </a>
+                                    }
+                                </td>
+                                <td>
+                                    @if (supplier.Name == "CNH")
+                                    {
+                                        /**/
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("Delete","Supplier", new { supplier.Id})" class="btn btn-danger btn-outline-info btn-sm">
+                                            Sil
+                                        </a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <!--end: Datatable -->
+            </div>
+        </div>
+    </div>
+</div>

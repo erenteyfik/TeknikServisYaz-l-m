@@ -1,0 +1,711 @@
+﻿@model TeknikServisYazılım.Entity.ServiceRegistrationForm
+@{
+    ViewBag.Title = "SRFPrint";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .m-footer, .m-header, #m_aside_left {
+        display: none;
+    }
+
+    h3, h4 {
+        font-size: 18px;
+    }
+
+    #printcontainer {
+        margin-top: -20px;
+
+    }
+
+    #printrow {
+        width: 700px;
+    }
+    #print-button{
+        visibility:hidden;
+    }
+</style>
+
+<div class="container" id="printcontainer" style="">
+    <div class="row" id="printrow" style="margin-top:10px">
+        <div class="container" id="print-container">
+            <!--begin::Item-->
+            <div class="container" style="">
+                <div class="row">
+                    @*<div class="col-md-12" style="">
+                        <a type="button" class="btn btn-primary m-btn" id="print-button" onClick="window.print()"">
+                            <i class="fa fa-print"></i> Yazdır
+                        </a>
+                    </div>*@
+                </div>
+                <div class="row" id="m-main" style="margin-top:-5px;">
+                    <div class="col-md-6" style="float:left;">
+                        <div>
+                            <h4 class="m-form__heading-title" style="font-size:25px;font-weight:700">
+                                CNH
+                            </h4>
+                            <span class="m-form__control-static" style="float:left">
+                                Telefon : 0(232) 441 0 411 <br />
+
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="float:right;">
+                        <div>
+                            <span class="m-form__control-static" style="float:right">
+                                Tarih : @DateTime.Now.ToString("MM-dd-yyyy") <br />
+                                Saat  : @DateTime.Now.ToString("HH:mm") <br />
+                                <b style="font-size:18px;"> @Model.product.PSerialNumber </b>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:20px">
+                    <div class="col-xm-12 col-lg-12">
+                        <h2 style="text-align:center"><b>SERVİS GİRİŞ TUTANAĞI - @Model.Id</b></h2>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="m-form__section m-form__section--first">
+                            <div class="m-form__heading" style="text-align:center">
+                                <h4 class="m-form__heading-title" style="font-weight:700">
+                                    Müşteri Bilgileri
+                                </h4>
+                            </div>
+                            <div class="m-separator m-separator--dashed m-separator--lg" style="margin-top:-1px;height:1px"></div>
+                            <div class="row" id="print-group">
+                                <div class="col-md-12" style="float:left;font-size:17px">
+                                    <div id="print-name">
+                                        @Model.customer.UserName
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row" id="m-main">
+                                <div class="col-md-12" style="float:left;font-size:17px">
+                                    <div id="print-name">
+                                        @Model.customer.Phone
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row" id="m-main">
+                                <div class="col-md-12" style="float:left;font-size:17px">
+                                    <div id="print-name">
+                                        @Model.customer.Email
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="m-form__section m-form__section--first">
+                            <div class="m-form__heading" style="text-align:center">
+                                <h4 class="m-form__heading-title" style="font-weight:700">
+                                    Ürün Bilgileri
+                                </h4>
+                            </div>
+                            <div class="m-separator m-separator--dashed m-separator--lg" style="margin-top:-1px;"></div>
+                            <div class="row" id="print-group">
+                                <div class="col-md-12">
+                                    <div class="row" id="m-main">
+                                        <div class="col-md-4" style="float:left;">
+                                            <div id="print-name">
+                                                Ürün Adı:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="float:right;">
+                                            <div>
+                                                <div class="col">
+                                                    <span class="m-form__control-static">
+
+                                                        @if (@Model.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Phone)
+                                                        {
+                                                            <span class="m-form__control-static">
+                                                                Cep Telefonu
+                                                            </span>
+                                                        }
+                                                        else if (@Model.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Notebook)
+                                                        {
+                                                            <span class="m-form__control-static">
+                                                                Notebook
+                                                            </span>
+                                                        }
+                                                        else if (@Model.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Desktop)
+                                                        {
+                                                            <span class="m-form__control-static">
+                                                                Masaüstü
+                                                            </span>
+                                                        }
+                                                        else if (@Model.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Tablet)
+                                                        {
+                                                            <span class="m-form__control-static">
+                                                                Tablet
+                                                            </span>
+                                                        }
+                                                        else if (@Model.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Other)
+                                                        {
+                                                            <span class="m-form__control-static">
+                                                                Diğer
+                                                            </span>
+                                                        }
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" id="m-main">
+                                        <div class="col-md-4" style="float:left;">
+                                            <div id="print-name">
+                                                Markası:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="float:right;">
+                                            <div>
+                                                <div class="col">
+                                                    <span class="m-form__control-static">
+                                                        @Model.product.PBrand
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" id="m-main">
+                                        <div class="col-md-4" style="float:left;">
+                                            <div id="print-name">
+                                                Modeli:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="float:right;">
+                                            <div>
+                                                <div class="col">
+                                                    <span class="m-form__control-static">
+                                                        @Model.product.PModel
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" id="m-main">
+                                        <div class="col-md-4" style="float:left;">
+                                            <div id="print-name">
+                                                Seri No:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="float:right;">
+                                            <div>
+                                                <div class="col">
+                                                    <span class="m-form__control-static">
+                                                        @Model.product.PSerialNumber
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" id="m-main">
+                                        <div class="col-md-4" style="float:left;">
+                                            <div id="print-name">
+                                                Batarya SN:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="float:right;">
+                                            <div>
+                                                <div class="col">
+                                                    <span class="m-form__control-static">
+                                                        @Model.product.PBatterySerialNumber
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" id="m-main">
+                                        <div class="col-md-4" style="float:left;">
+                                            <div id="print-name">
+                                                Batarya:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="float:right;">
+                                            <div>
+                                                <div class="col">
+                                                    @if (Model.product.PBattery == true)
+                                                    {
+                                                        <span class="m-form__control-static">
+                                                            Alındı
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="m-form__control-static">
+                                                            Alınmadı
+                                                        </span>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="m-main">
+                                        <div class="col-md-4" style="float:left;">
+                                            <div id="print-name">
+                                                Sarj aleti:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="float:right;">
+                                            <div>
+                                                <div class="col">
+                                                    @if (Model.product.PChanger == true)
+                                                    {
+                                                        <span class="m-form__control-static">
+                                                            Alındı
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="m-form__control-static">
+                                                            Alınmadı
+                                                        </span>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" id="m-main">
+                                        <div class="col-md-4" style="float:left;">
+                                            <div id="print-name">
+                                                Ek Parçalar:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="float:right;">
+                                            <div>
+                                                <div class="col">
+                                                    <span class="m-form__control-static">
+                                                        @Model.product.Ekparcalar
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="m-separator m-separator--dashed m-separator--lg" style="margin-top:15px"></div>
+                <div class="m-form__section" style="margin-top:-25px">
+                    <div class="row">
+                        <div class="col-md-6" style="float:left;font-size:14px"><div style="float:left"><strong>Geliş Tarihi</strong>: @DateTime.Now.ToString("MM-dd-yyyy")</div></div>
+                        <div class="col-md-6" style="float:right;font-size:14px"><div style="float:right"><strong>Geliş Saati</strong> :  @DateTime.Now.ToString("HH:mm") </div></div>
+                    </div>
+                    <div class="row" style="margin-top:20px">
+                        <div class="col-md-6">
+                            <div class="m-form__heading" style="text-align:center;margin-top:5px">
+                                <h4 class="m-form__heading-title" style="font-weight:700">
+                                    MÜŞTERİNİN BİLDİRDİĞİ ARIZA
+                                </h4>
+                            </div>
+                            <div class="row" id="m-main">
+                                <div class="col-md-12" style="float:left;">
+                                    <div>
+                                        @Model.product.PFaultrecord
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="m-form__heading" style="text-align:center;margin-top:5px;">
+                                <h4 class="m-form__heading-title" style="font-weight:700">
+                                    CİHAZIN MEVCUT DURUMU
+                                </h4>
+                            </div>
+                            <div class="row" id="m-main">
+                                <div class="col-md-12" style="float:left;">
+                                    <div>
+                                        @Model.product.PFaultpersonel
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                <div class="m-form__section">
+                    <div class="m-form__heading" style="margin-top:-25px">
+                        <div class="row" style="text-align:center;">
+                            <div class="col-md-6">
+                                <h4 class="m-form__heading-title" style="font-weight:700">
+                                    Teslim Eden
+                                </h4>
+                                <div class="m-separator m-separator--dashed m-separator--lg" style="margin-top:-1px"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="m-form__heading-title" style="font-weight:700">
+                                    Teslim Alan
+                                </h4>
+                                <div class="m-separator m-separator--dashed m-separator--lg" style="margin-top:-1px"></div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="form-group m-form__group m-form__group--sm row" style="margin-top:-30px">
+                            <div class="col-md-12">
+                                <span class="m-form__control-static" style="font-size:11px">
+                                    Servisimize onarım için alınan cihazların içerisinde yüklü bulunan yazılımlardan ve datalardan firmamız sorumlu değildir. <br />
+                                    Tüm sorumluluk cihaz sahibine aittir. <br />
+                                    Firmamızda Tamiratı Yapılan Ürünler 3 Ay Garantilidir <br />
+                                    3 Ay içerisinde Alınmayan Ürünlerden Firmamız Sorumlu Değildir.
+
+                                </span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--end::Item-->
+            <hr style="border-style:dashed;border-width: 2px;" />
+        </div>
+
+    </div>
+
+
+
+    <div class="row" id="printrow" style="margin-top:-20px">
+        <div class="container" id="print-container">
+            <!--begin::Item-->
+            <div class="container" style="">
+                <div class="row" id="m-main" style="">
+                    <div class="col-md-6" style="float:left;">
+                        <div>
+                            <h4 class="m-form__heading-title" style="font-size:25px;font-weight:700">
+                                CNH
+                            </h4>
+                            <span class="m-form__control-static" style="float:left">
+                                Telefon : 0(232) 441 0 411 <br />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="float:right;">
+                        <div>
+                            <span class="m-form__control-static" style="float:right">
+                                Tarih : @DateTime.Now.ToString("MM-dd-yyyy") <br />
+                                Saat  :  @DateTime.Now.ToString("HH:mm") <br />
+                                <b style="font-size:18px;"> @Model.product.PSerialNumber </b>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:20px">
+                    <div class="col-xm-12 col-lg-12">
+                        <h2 style="text-align:center"><b>SERVİS GİRİŞ TUTANAĞI - @Model.Id</b></h2>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="m-form__section m-form__section--first">
+                            <div class="m-form__heading" style="text-align:center">
+                                <h4 class="m-form__heading-title" style="font-weight:700">
+                                    Müşteri Bilgileri
+                                </h4>
+                            </div>
+                            <div class="m-separator m-separator--dashed m-separator--lg" style="margin-top:-1px;height:1px"></div>
+                            <div class="row" id="print-group">
+                                <div class="col-md-12" style="float:left;font-size:17px">
+                                    <div id="print-name">
+                                        @Model.customer.UserName
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row" id="m-main">
+                                <div class="col-md-12" style="float:left;font-size:17px">
+                                    <div id="print-name">
+                                        @Model.customer.Phone
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row" id="m-main">
+                                <div class="col-md-12" style="float:left;font-size:17px">
+                                    <div id="print-name">
+                                        @Model.customer.Email
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="m-form__section m-form__section--first">
+                            <div class="m-form__heading" style="text-align:center">
+                                <h4 class="m-form__heading-title" style="font-weight:700">
+                                    Ürün Bilgileri
+                                </h4>
+                            </div>
+                            <div class="m-separator m-separator--dashed m-separator--lg" style="margin-top:-1px"></div>
+                            <div class="row" id="print-group">
+                                <div class="col-md-12">
+                                    <div class="row" id="m-main">
+                                        <div class="col-md-4" style="float:left;">
+                                            <div id="print-name">
+                                                Ürün Adı:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="float:right;">
+                                            <div>
+                                                <div class="col">
+
+                                                    @if (@Model.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Phone)
+                                                    {
+                                                        <span class="m-form__control-static">
+                                                            Cep Telefonu
+                                                        </span>
+                                                    }
+                                                    else if (@Model.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Notebook)
+                                                    {
+                                                        <span class="m-form__control-static">
+                                                            Notebook
+                                                        </span>
+                                                    }
+                                                    else if (@Model.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Desktop)
+                                                    {
+                                                        <span class="m-form__control-static">
+                                                            Masaüstü
+                                                        </span>
+                                                    }
+                                                    else if (@Model.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Tablet)
+                                                    {
+                                                        <span class="m-form__control-static">
+                                                            Tablet
+                                                        </span>
+                                                    }
+                                                    else if (@Model.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Other)
+                                                    {
+                                                        <span class="m-form__control-static">
+                                                            Diğer
+                                                        </span>
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" id="m-main">
+                                        <div class="col-md-4" style="float:left;">
+                                            <div id="print-name">
+                                                Markası:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="float:right;">
+                                            <div>
+                                                <div class="col">
+                                                    <span class="m-form__control-static">
+                                                        @Model.product.PBrand
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" id="m-main">
+                                        <div class="col-md-4" style="float:left;">
+                                            <div id="print-name">
+                                                Modeli:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="float:right;">
+                                            <div>
+                                                <div class="col">
+                                                    <span class="m-form__control-static">
+                                                        @Model.product.PModel
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row" id="m-main">
+                                        <div class="col-md-4" style="float:left;">
+                                            <div id="print-name">
+                                                Seri No:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="float:right;">
+                                            <div>
+                                                <div class="col">
+                                                    <span class="m-form__control-static">
+                                                        @Model.product.PSerialNumber
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" id="m-main">
+                                        <div class="col-md-4" style="float:left;">
+                                            <div id="print-name">
+                                                Batarya SN:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="float:right;">
+                                            <div>
+                                                <div class="col">
+                                                    <span class="m-form__control-static">
+                                                        @Model.product.PBatterySerialNumber
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="m-main">
+                                        <div class="col-md-4" style="float:left;">
+                                            <div id="print-name">
+                                                Batarya:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="float:right;">
+                                            <div>
+                                                <div class="col">
+                                                    @if (Model.product.PBattery == true)
+                                                    {
+                                                        <span class="m-form__control-static">
+                                                            Alındı
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="m-form__control-static">
+                                                            Alınmadı
+                                                        </span>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" id="m-main">
+                                        <div class="col-md-4" style="float:left;">
+                                            <div id="print-name">
+                                                Ek Parçalar:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="float:right;">
+                                            <div>
+                                                <div class="col">
+                                                    <span class="m-form__control-static">
+                                                        @Model.product.Ekparcalar
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="m-separator m-separator--dashed m-separator--lg" style="margin-top:15px"></div>
+                <div class="m-form__section" style="margin-top:-25px">
+                    <div class="row">
+                        <div class="col-md-6" style="float:left;font-size:14px"><div style="float:left"><strong>Geliş Tarihi</strong>: @DateTime.Now.ToString("MM-dd-yyyy")</div></div>
+                        <div class="col-md-6" style="float:right;font-size:14px"><div style="float:right"><strong>Geliş Saati</strong> :  @DateTime.Now.ToString("HH:mm") </div></div>
+                    </div>
+
+                    <div class="row" style="margin-top:20px">
+                        <div class="col-md-6">
+                            <div class="m-form__heading" style="text-align:center;margin-top:5px">
+                                <h4 class="m-form__heading-title" style="font-weight:700">
+                                    MÜŞTERİNİN BİLDİRDİĞİ ARIZA
+                                </h4>
+                            </div>
+                            <div class="row" id="m-main">
+                                <div class="col-md-12" style="float:left;">
+                                    <div>
+                                        @Model.product.PFaultrecord
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="m-form__heading" style="text-align:center;margin-top:5px;">
+                                <h4 class="m-form__heading-title" style="font-weight:700">
+                                    CİHAZIN MEVCUT DURUMU
+                                </h4>
+                            </div>
+                            <div class="row" id="m-main">
+                                <div class="col-md-12" style="float:left;">
+                                    <div>
+                                        @Model.product.PFaultpersonel
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                <div class="m-form__section">
+                    <div class="m-form__heading" style="margin-top:-25px">
+                        <div class="row" style="text-align:center;">
+                            <div class="col-md-6">
+                                <h4 class="m-form__heading-title" style="font-weight:700">
+                                    Teslim Eden
+                                </h4>
+                                <div class="m-separator m-separator--dashed m-separator--lg" style="margin-top:-1px"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="m-form__heading-title" style="font-weight:700">
+                                    Teslim Alan
+                                </h4>
+                                <div class="m-separator m-separator--dashed m-separator--lg" style="margin-top:-1px"></div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="form-group m-form__group m-form__group--sm row" style="margin-top:-30px">
+                            <div class="col-md-12">
+                                <span class="m-form__control-static" style="font-size:11px">
+                                    Servisimize onarım için alınan cihazların içerisinde yüklü bulunan yazılımlardan ve datalardan firmamız sorumlu değildir. <br />
+                                    Tüm sorumluluk cihaz sahibine aittir. <br />
+                                    Firmamızda Tamiratı Yapılan Ürünler 3 Ay Garantilidir <br />
+                                    3 Ay içerisinde Alınmayan Ürünlerden Firmamız Sorumlu Değildir.
+
+                                </span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--end::Item-->
+        </div>
+    </div>
+</div>
+
+

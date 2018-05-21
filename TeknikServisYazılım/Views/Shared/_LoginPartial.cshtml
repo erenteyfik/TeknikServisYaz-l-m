@@ -1,0 +1,36 @@
+﻿<style>
+    .user-area li,
+    .user-area li a {
+        display: inline-block !important;
+        margin-top: 5px;
+        font-size: 18px;
+        color:black;
+        font-weight:600;
+    }
+</style>
+<ul class="user-area my-2 my-lg-0" style="float:right">
+
+    @if (Request.IsAuthenticated)
+    {
+        //giriş yaptıysa
+        //kullanıcıadını ve logout linklerini cıkar
+        <li class="" id="abc">
+            <a class="nav-link" href="/AYS">@User.Identity.Name</a>
+        </li>
+
+        <li class="" id="abc">
+            <a class="nav-link" href="/Account/Logout">LOGOUT</a>
+        </li>
+    }
+
+    else
+    {
+        //girişoolmamısa
+        //login ve register linkleri cıkar
+        <li class="" id="abc">
+            <a class="nav-link" href="/Account/Login">LOGİN</a>
+        </li>
+    }
+</ul>
+
+

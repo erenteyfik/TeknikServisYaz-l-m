@@ -1,0 +1,118 @@
+﻿@model TeknikServisYazılım.Entity.Sellproduct
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-9" style="margin-bottom:50px;margin-top:30px;margin-left:50px">
+    <!--begin::Portlet-->
+    <div class="m-portlet m-portlet--tab">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <span class="m-portlet__head-icon m--hide">
+                        <i class="la la-gear"></i>
+                    </span>
+                    <h3 class="m-portlet__head-text">
+                        Ürünü Sil
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <form action="/" method="post" class="m-form m-form--fit m-form--label-align-right">
+
+            <div class="m-portlet__body">
+                <div class="form-group m-form__group m--margin-top-10">
+                    <div class="alert m-alert m-alert--default" role="alert">
+                        <h3>Ürünü silmek istediğinizden emin misiniz?</h3>
+                    </div>
+                </div>
+
+                <div class="form-group m-form__group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="exampleInputEmail1">
+                                Ürün adı :
+                            </label>
+                        </div>
+                        <div class="col-md-2" style="margin-left:-90px">
+                            @Html.DisplayFor(model => model.SName, new { @class = "form-control m-input", @placeholer = "Ürün adı" })
+                        </div>
+                        <div class="col-md-2">
+                            <label for="exampleInputEmail1">
+                                Marka :
+                            </label>
+                        </div>
+                        <div class="col-md-2" style="margin-left:-90px">
+                            @Html.DisplayFor(model => model.SBrand, new { @class = "form-control m-input", @placeholer = "Ürün adı" })
+
+                        </div>
+
+                        <div class="col-md-2">
+                            <label for="exampleInputEmail1">
+                                Model :
+                            </label>
+                        </div>
+                        <div class="col-md-2" style="margin-left:-90px">
+                            @Html.DisplayFor(model => model.SModel, new { @class = "form-control m-input", @placeholer = "Ürün adı" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group m-form__group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="exampleInputEmail1">
+                                Stock :
+                            </label>
+                        </div>
+                        <div class="col-md-2" style="margin-left:-90px">
+                            @Html.DisplayFor(model => model.Stock, new { @class = "form-control m-input", @placeholer = "Ürün adı" })
+                        </div>
+
+                        <div class="col-md-2">
+                            <label for="exampleInputEmail1">
+                                Fiyat :
+                            </label>
+                        </div>
+                        <div class="col-md-2" style="margin-left:-90px">
+                            @Html.DisplayFor(model => model.Price, new { @class = "form-control m-input", @placeholer = "Ürün adı" })
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group m-form__group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="exampleTextarea">
+                                Açıklama
+                            </label>
+                        </div>
+                        <div class="col-md-10" style="margin-left:-90px">
+                            @Html.DisplayFor(model => model.Description, new { @class = "form-control m-input", @placeholer = "Ürün adı" })
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </form>
+        <div class="m-portlet__foot m-portlet__foot--fit">
+            @using (Html.BeginForm("Delete", "ProductSell", Model.Id, FormMethod.Post, new { @class = "m-form m-form--fit m-form--label-align-right", @style="height:60px;margin-left:30px;margin-top:20px" } ))
+            {
+                @Html.AntiForgeryToken()
+           
+                    <div class="form-actions">
+                        <input type="submit" value="Sil" class="btn btn-danger"/> |
+                        @Html.ActionLink("Geri Dön", "Index")
+                    </div>
+         
+            }
+        </div>
+    </div>
+    <!--end::Portlet-->
+</div>
+
+

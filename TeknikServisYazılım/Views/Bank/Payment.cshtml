@@ -1,0 +1,79 @@
+﻿@model TeknikServisYazılım.Entity.Bank
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="col-md-6" style="margin-bottom:50px;margin-top:30px;margin-left:50px">
+    <!--begin::Portlet-->
+    <div class="m-portlet m-portlet--tab">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <span class="m-portlet__head-icon m--hide">
+                        <i class="la la-gear"></i>
+                    </span>
+                    <h3 class="m-portlet__head-text">
+                        @Html.DisplayFor(model => model.UserName, new { @class = "form-control m-input" }) ait    ÖDEME EKLE
+                    </h3>
+                </div>
+            </div>
+        </div>
+        @using (Html.BeginForm("PaymentPost", "Bank", null, FormMethod.Post, new { @class = "m-form m-form--fit m-form--label-align-right" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model=>model.UserName)
+            <div class="m-portlet__body">
+                <div class="form-group m-form__group m--margin-top-10">
+                    <div class="alert m-alert m-alert--default" role="alert">
+                        Bu formdan yeni Ödeme ekleyebilirsiniz.
+                    </div>
+                </div>
+
+                <div class="form-group m-form__group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1">
+                                Ödeme :
+                            </label>
+                        </div>
+                        <div class="col-md-2" style="margin-left:-30px">
+
+                            @Html.TextBoxFor(model => model.Payment, new { @class = "form-control m-input", @type = "number", @placeholer = "Ödeme" })
+
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:20px">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1">
+                                Açıklama :
+                            </label>
+                        </div>
+                        <div class="col-md-6" style="margin-left:-30px">
+                            @Html.TextBoxFor(model => model.BankDescription, new { @class = "form-control m-input", @placeholer = "Açıklama" })
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="m-portlet__foot m-portlet__foot--fit">
+                <div class="m-form__actions">
+                    <input type="submit" value="Ödeme Yap" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+
+    </div>
+    <!--end::Portlet-->
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

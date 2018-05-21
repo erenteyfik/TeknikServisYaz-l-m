@@ -1,0 +1,109 @@
+﻿@model IEnumerable<TeknikServisYazılım.Entity.TechnicalServiceLog>
+@{
+    ViewBag.Title = "LogTechnicalServiceLog";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+</style>
+
+<div class="m-grid__item m-grid__item--fluid m-wrapper">
+    <!-- BEGIN: Subheader -->
+    <div class="m-subheader ">
+        <div class="d-flex align-items-center">
+            <div class="mr-auto">
+                <h3 class="m-subheader__title m-subheader__title--separator">
+                    Loglar
+                </h3>
+            </div>
+        </div>
+    </div>
+    <!-- END: Subheader -->
+    <div class="m-content">
+        <div class="m-alert m-alert--icon m-alert--air m-alert--square alert alert-dismissible m--margin-bottom-30" role="alert">
+            <div class="m-alert__icon">
+                <i class="flaticon-exclamation m--font-brand"></i>
+            </div>
+            <div class="m-alert__text">
+                Bu menüden logları listeleyebilirsiniz. (En son tarihe göre listelenir)
+            </div>
+        </div>
+        <div class="m-portlet m-portlet--mobile">
+
+            <div class="m-portlet__body">
+                <!--begin: Search Form -->
+                <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                    <div class="row align-items-center">
+                        <div class="col-xl-8 order-2 order-xl-1">
+                            <div class="form-group m-form__group row align-items-center">
+                                <div class="col-md-4">
+                                    <div class="m-input-icon m-input-icon--left">
+                                        <input type="text" class="form-control m-input" placeholder="Search..." id="generalSearch">
+                                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                                            <span>
+                                                <i class="la la-search"></i>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--end: Search Form -->
+                <!--begin: Datatable -->
+                <table class="m-datatable" id="html_table">
+                    <thead>
+                        <tr>
+                            <th title="Field #1">
+                                Log ID
+                            </th>
+                            <th title="Field #2">
+                                Kullanan
+                            </th>
+                            <th title="Field #3">
+                                Log Açıklama
+                            </th>
+                            <th title="Field #6">
+                                Tarih
+                            </th>
+                            <th>Müşteri adı</th>
+                            <th> Servis Form ID</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var TechnicalServiceForm in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @TechnicalServiceForm.Id
+                                </td>
+                                <td>
+                                    @TechnicalServiceForm.LogWho
+                                </td>
+                                <td>
+                                    @TechnicalServiceForm.LogDescription
+                                </td>
+                                <td>
+                                    @TechnicalServiceForm.LogDatetime
+                                </td>
+                                <td>
+                                    @TechnicalServiceForm.LogWhichCustomer
+                                </td>
+                                <td>
+                                   @TechnicalServiceForm.ServiceRegistrationFormID
+                                </td>
+
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <!--end: Datatable -->
+            </div>
+        </div>
+    </div>
+</div>
+

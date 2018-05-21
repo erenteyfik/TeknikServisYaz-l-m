@@ -1,0 +1,171 @@
+﻿@model TeknikServisYazılım.Models.FilterModel
+@{
+    ViewBag.Title = "ServisFormlarım";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    #suppliername {
+        text-decoration: none;
+    }
+
+    #pstate {
+        color: white;
+        font-weight: 700;
+        font-size: 14px;
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    tbody tr td {
+        font-weight: 700;
+    }
+
+    select#statedropdown, select#userdropdown {
+        color: #fff;
+        background-color: #311B92;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        padding-left: 10px;
+        height: 37px;
+        width: 150px;
+        margin-left: 10px;
+    }
+
+    #filtrebtn {
+        color: #fff;
+        background-color: #311B92;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        padding-left: 10px;
+        height: 37px;
+        width: 100px;
+        margin-left: 10px;
+    }
+
+</style>
+<div class="m-grid__item m-grid__item--fluid m-wrapper">
+
+    <!-- BEGIN: Subheader -->
+    <div class="m-subheader ">
+        <div class="d-flex align-items-center">
+            <div class="mr-auto">
+                <h3 class="m-subheader__title m-subheader__title--separator">
+                    Servis Formlarım
+                </h3>
+            </div>
+        </div>
+    </div>
+    <!-- END: Subheader -->
+
+    <div class="m-content">
+        <div class="m-alert m-alert--icon m-alert--air m-alert--square alert alert-dismissible m--margin-bottom-30" role="alert">
+            <div class="m-alert__icon">
+                <i class="flaticon-exclamation m--font-brand"></i>
+            </div>
+            <div class="m-alert__text">
+                BU MENÜDEN SERVİS GİRİŞ TUTANAĞI FORMLARINI LİSTEYEBİLİR, TARAYICIDAN YAZDIRABİLİR VE SİLEBİLİRSİNİZ.
+                <strong>EN SON İŞLEM YAPILAN FORM! EN BAŞTA LİSTELENİR</strong>
+            </div>
+        </div>
+        <div class="m-portlet m-portlet--mobile">
+
+            <div class="m-portlet__body">
+                <!--begin: Search Form -->
+                <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                    <div class="row align-items-center">
+                        <div class="col-xl-12 order-2 order-xl-1">
+                            <div class="form-group m-form__group row align-items-center">
+
+                                <div class="col-md-4">
+                                    <div class="m-input-icon m-input-icon--left">
+                                        <input type="text" class="form-control m-input" placeholder="Search..." id="generalSearch">
+                                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                                            <span>
+                                                <i class="la la-search"></i>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                @using (Html.BeginForm("ServisFormlarımState", "Admin", null, FormMethod.Post, new { @class = "row", @id = "" }))
+                                {
+                                    @Html.EnumDropDownListFor(i => i.EnumState, "TAMAMI", new { @class = "form-control m-input", @id = "statedropdown", @style = "" })
+
+                                    @Html.DropDownListFor(model => model.UserFilter, new SelectList(Model.TransferUserS, "Id", "UserName"), "KULLANICI", new { @class = "form-control m-input", @id = "userdropdown", @style = "" })
+
+                                    <button type="submit" id="filtrebtn" class="btn btn-primary btn-sm">
+                                        <span>
+                                            <i class="flaticon-interface-6" style="margin-left:-5px"></i>
+                                            &nbsp;&nbsp;
+                                            <span style="margin-left:-10px;margin-top:-10px">
+                                                FİLTRELE
+                                            </span>
+                                        </span>
+                                    </button>
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--end: Search Form -->
+
+
+                <!--begin: Datatable -->
+                <div id="table-wrapper">
+                    @Html.Partial("_PartialServisFormlarım", Model)
+                </div>
+                <!--end: Datatable -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.0.0.min.js"></script>
+
+<script>
+            $(document).ready(function () {
+                $('#servis-formu').mDatatable({
+                    search: {
+                        input: $('#generalSearch')
+                    },
+                    layout: {
+                        scroll: true,
+                        height: 1400
+                    },
+                });
+                //$("#filtrele").click(function () {
+                //    var value=$("#statedropdown").val();
+                //});
+                @*$("#statedropdown").change(function () {
+                    var value = this.value;
+                    $.ajax({
+                        url: '@Url.Action("ServisFormlarımState", "Admin")',
+                        type: 'POST',
+                        data: {
+                            state: value
+                        },
+                        success: function (response) {
+                            //console.log(response);
+                            $('#table-wrapper').html(response);
+
+                            $('#servis-formu').mDatatable({
+                                search: {
+                                    input: $('#generalSearch')
+                                },
+                                layout: {
+                                    scroll: true,
+                                    height: 1400
+                                }
+                            });
+                        },
+                        error: function (err) {
+
+                        }
+                    });
+                });*@
+            });
+   
+</script>

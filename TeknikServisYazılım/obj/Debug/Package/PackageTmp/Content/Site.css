@@ -1,0 +1,120 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    /*max-width: 280px;*/
+}
+
+/*ServisFormuKAyıt2 begin*/
+
+.auto-error1, .auto-error{
+    position: absolute;
+    display: none;
+    top: 7px;
+    right: 5px;
+    color: white;
+    background-color: #36a3f7;
+    border-color: #36a3f7;
+    text-align: center;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    padding: 0.1rem;
+    border-radius: 0.25rem;
+    font-size: 14px
+}
+
+.auto-username {
+    position: absolute;
+    display: none;
+    top: 7px;
+    right: 28px;
+    color: white;
+    width:50px;
+    background-color: #36a3f7;
+    border-color: #36a3f7;
+    text-align: center;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    padding: 0.1rem;
+    border-radius: 0.25rem;
+    font-size: 14px;
+}
+/*ServisFormuKAyıt2 end*/
+/*SRFPring CSS begin*/
+#print-head {
+    font-size: 14px;
+}
+
+#print-container {
+    background-color: white;
+    margin-left: -50px;
+    margin-bottom: -20px;
+    width: 800px;
+    padding: 30px 30px;
+}
+#print-group {
+    margin-top: -21px;
+    font-size: 14px;
+}
+#print-label {
+    font-weight: 700;
+}
+#print-button {
+    background-color: white;
+    margin-left: 0;
+    margin-bottom: 20px;
+    color: black;
+}
+    #print-button:hover {
+        background-color: black;
+    }
+#print-name {
+    font-weight: 700;
+}
+#container-hr {
+    border: none;
+    border-top: solid 1px;
+    max-width: 1500px;
+    margin-top: 40px;
+
+}
+#m-main {
+    font-size: 13px
+}
+/*SRFPring CSS end*/
+
+
+/*select#supplierdropdown {
+    color: #fff;
+    background-color: #311B92;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    padding-left: 10px;
+    height: 37px;
+    width: 150px;
+    margin-left: 10px;
+}
+
+#supplierdropdown, #userdropdown {
+    color: #fff;
+    background-color: #311B92;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    padding-left: 10px;
+    height: 37px;
+    width: 150px;
+    margin-left: 10px;
+}*/

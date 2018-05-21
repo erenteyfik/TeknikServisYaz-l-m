@@ -1,0 +1,230 @@
+﻿@model TeknikServisYazılım.Models.FilterModel
+
+<style>
+    #servisa {
+        text-decoration: none;
+        color: black;
+        font-weight: 700;
+        font-size: 16px
+    }
+
+    tbody tr, tbody tr:hover {
+        background-color: #BBDEFB;
+    }
+
+    #pstate {
+        width: 100px;
+        text-align: center;
+        padding: 3px 3px;
+    }
+
+    .m-datatable__cell span {
+        width: 150px !important;
+    }
+</style>
+<table class="m-datatable" id="servis-formu" width="100%">
+    <thead>
+        <tr>
+            <th>
+                FORM ID
+            </th>
+            <th>
+                MÜŞTERİ ADI
+            </th>
+            <th>
+                TELEFON
+            </th>
+
+            <th>
+                KATEGORİ ADI
+            </th>
+            <th>
+                MARKA
+            </th>
+            <th>
+                MODEL
+            </th>
+
+            <th>
+                SORUMLU
+            </th>
+            <th>
+                DURUMU
+            </th>
+            @*<th>
+                    Tamir Durumu
+                </th>*@
+            <th>
+                Geliş Tarihi
+            </th>
+            <th>
+                Seri No
+            </th>
+            <th>
+                ÜCRET
+            </th>
+            <th>
+                SİL
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var SRF in Model.ServiceRegistrationForm)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("SRFEdit", "Admin", new { SRF.Id, SRF.CustomerId, SRF.ProductId, SRF.SellproductId })" id="servisa">
+                        @SRF.Id
+                    </a>
+                </td>
+                <td>
+                    <a href="@Url.Action("SRFEdit", "Admin", new { SRF.Id, SRF.CustomerId, SRF.ProductId, SRF.SellproductId })" id="servisa">
+                        @SRF.customer.UserName
+                    </a>
+                </td>
+                <td>
+                    <a href="@Url.Action("SRFEdit", "Admin", new { SRF.Id, SRF.CustomerId, SRF.ProductId, SRF.SellproductId })" id="servisa" style="font-size:14px">
+                        @SRF.customer.Phone
+                    </a>
+                </td>
+
+                <td>
+                    <a href="@Url.Action("SRFEdit", "Admin", new { SRF.Id, SRF.CustomerId, SRF.ProductId, SRF.SellproductId })" id="servisa">
+                        @if (@SRF.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Phone)
+                        {
+                            <p style="margin-top:10px">Cep Telefonu</p>
+                        }
+                        else if (@SRF.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Notebook)
+                        {
+                            <p style="margin-top:10px">Notebook</p>
+                        }
+                        else if (@SRF.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Desktop)
+                        {
+                            <p style="margin-top:10px">Masaüstü</p>
+                        }
+                        else if (@SRF.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Tablet)
+                        {
+                            <p style="margin-top:10px">Tablet</p>
+                        }
+                        else if (@SRF.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Other)
+                        {
+                            <p style="margin-top:10px">Diğer</p>
+                        }
+                    </a>
+                </td>
+                <td>
+                    <a href="@Url.Action("SRFEdit", "Admin", new { SRF.Id, SRF.CustomerId, SRF.ProductId, SRF.SellproductId })" id="servisa">
+                        @SRF.product.PBrand
+                    </a>
+                </td>
+                <td>
+                    <a href="@Url.Action("SRFEdit", "Admin", new { SRF.Id, SRF.CustomerId, SRF.ProductId, SRF.SellproductId })" id="servisa">
+                        @SRF.product.PModel
+                    </a>
+                </td>
+                <td id="supplier">
+                    <div id="servisa">
+                        @SRF.KimeAit
+                        @if (SRF.SRFDevrettiUser == true)
+                        {
+                            <p>
+                                -> @SRF.KimeDevretti
+                            </p>
+                        }
+                    </div>
+
+                </td>
+                <td>
+
+                    @if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.SFRNew)
+                    {
+                        <p style="background-color:blue;" id="pstate">YENİ ÜRÜN</p>
+                    }
+                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.Repair)
+                    {
+                        <p style="background-color:red;" id="pstate">TAMİR EDİLDİ</p>
+                    }
+                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.Waiting)
+                    {
+                        <p style="background-color:green;" id="pstate">ONAY BEKLİYOR</p>
+                    }
+                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.Item)
+                    {
+                        <p style="background-color:#263238;" id="pstate">PARÇA BEKLİYOR</p>
+                    }
+                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.Completed)
+                    {
+                        <p style="background-color:darkblue;" id="pstate"> TAMAMLANDI </p>
+                    }
+                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.Suppliers)
+                    {
+                        <p style="background-color:#795548;" id="pstate">DIŞ SERVİS</p>
+                    }
+                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.Approved)
+                    {
+                        <p style="background-color:#E65100;" id="pstate">ONAYLANDI</p>
+                    }
+                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.SFRProcess)
+                    {
+                        <p style="background-color:#4A148C;" id="pstate">İŞLEMDE</p>
+                    }
+                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.SFRPricegive)
+                    {
+                        <p style="background-color:#311B92;" id="pstate">FİYAT VERİLECEK</p>
+                    }
+                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.SFRWasDelivered)
+                    {
+                        <p style="background-color:#3F51B5;" id="pstate">TESLİM EDİLDİ</p>
+                    }
+                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.SFRReturn)
+                    {
+                        <p style="background-color:#F44336;" id="pstate">İADE</p>
+                    }
+                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.SFRTest)
+                    {
+                        <p style="background-color:#9C27B0;" id="pstate">TEST AŞAMASINDA</p>
+                    }
+                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.SFRSecond)
+                    {
+                        <p style="background-color:#673AB7;" id="pstate">İKİNCİ GELİŞ</p>
+                    }
+
+                </td>
+
+                <td>
+                    <p id="servisa">
+                        @if (@SRF.SRFArrivalDatetime == null)
+                        {
+                            @SRF.SRFArrivalDatetime
+                        }
+                        else
+                        {
+                            @(((DateTime)SRF.SRFArrivalDatetime).ToString("dd-MM-yyyy"))
+                        }
+                    </p>
+
+                </td>
+                <td>
+                    <p id="servisa">
+                        @SRF.product.PSerialNumber
+                    </p>
+                </td>
+                <td class="serialnumber">
+                    <p id="servisa">
+                        @SRF.Price
+                    </p>
+                </td>
+                <td>
+                    <a href="@Url.Action("SRFDelete", "Admin", new { id = SRF.Id })" class="btn btn-sm btn-danger">
+                        <i class="fa fa-trash-o"></i>
+                    </a>
+                </td>
+
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+

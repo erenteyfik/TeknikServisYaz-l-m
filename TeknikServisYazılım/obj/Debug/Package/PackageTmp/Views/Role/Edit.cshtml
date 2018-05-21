@@ -1,0 +1,100 @@
+﻿@model TeknikServisYazılım.Models.RoleEditModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container" style="background-color:white;margin-top:50px;margin-bottom:100px;padding: 50px 50px">
+    @using (Html.BeginForm())
+    {
+        <input type="hidden" name="roleName" value="@Model.role.Name" />
+        <input type="hidden" name="RoleId" value="@Model.role.Id" />
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4>
+                    <strong>
+                        Bu menüden Kullanıcıları listeleyebilir. <br />
+                        İşaretlediklerinizi @Model.role.Name rolüne atayabilir ve çıkarabilirsiniz.
+                    </strong>
+                </h4>
+            </div>
+            <table class="table table-striped">
+                @if (Model.NonMembers.Count() == 0)
+                {
+                    <tr><td colspan="2">bu role eklenebilecek kullanıcı yok</td></tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            User
+                        </td>
+                        <td>
+                            Email
+                        </td>
+
+                        <td>Role</td>
+                    </tr>
+
+                    foreach (var user in Model.NonMembers)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>@user.Email</td>
+                            <td>
+                                <input type="checkbox" name="IdsToAdd" value="@user.Id" />
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Rol Ata</button>
+        <br /><br />
+        <hr />
+        <br /><br />
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3>@Model.role.Name rolüne sahip kullanıcılar</h3>
+
+            </div>
+            <table class="table table-striped">
+                @if (Model.Members.Count() == 0)
+                {
+                    <tr><td colspan="2">bu role eklenmiş bir kullanıcı yok</td></tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            User
+                        </td>
+                        <td>
+                            Email
+                        </td>   
+                        <td>Role</td>
+                    </tr>
+
+                    foreach (var user in Model.Members)
+                    {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td>
+                            <input type="checkbox" name="IdsToDelete" value="@user.Id" />
+                        </td>
+                    </tr>
+                    }
+                }
+            </table>
+            
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-bottom:50px">Rolden Çıkar</button>
+    }
+</div>
+
+

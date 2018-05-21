@@ -1,0 +1,174 @@
+﻿@model IEnumerable<TeknikServisYazılım.Entity.ServiceRegistrationForm>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@*<style>
+    #suppliername {
+        text-decoration: none;
+    }
+</style>
+<div class="m-grid__item m-grid__item--fluid m-wrapper">
+
+    <div class="m-content">
+
+        <div class="m-portlet m-portlet--mobile">
+
+            <div class="m-portlet__body">
+                <!--begin: Search Form -->
+
+                <!--end: Search Form -->
+                <!--begin: Datatable -->
+                <table class="m-datatable" id="html_table" width="100%">
+                    <thead>
+                        <tr>
+
+                            <th title="Field #2">
+                                Müşteri Adı
+                            </th>
+                            <th title="Field #3">
+                                Telefon
+                            </th>
+
+                            <th title="Field #7">
+                                Kategori Adı
+                            </th>
+                            <th title="Field #8">
+                                Markası
+                            </th>
+
+                            <th>
+                                Tedarikçi
+                            </th>
+                            <th>
+                                Durumu
+                            </th>
+                            <th>
+                                Tamir Durumu
+                            </th>
+                            <th>
+                                Yazdır
+                            </th>
+                            <th>
+                                Ücret
+                            </th>
+                            <th>
+                                Sil
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var SRF in Model)
+                        {
+                            if (SRF.SFRState== TeknikServisYazılım.Entity.EnumProductState.SFRNew)
+                            {
+
+                         
+                            <tr>
+
+                                <td>
+                                    @SRF.customer.UserName
+                                </td>
+                                <td>
+                                    @SRF.customer.Phone
+                                </td>
+
+                                <td>
+                                    @if (@SRF.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Phone)
+                                    {
+                                        <p>Cep Telefonu</p>
+                                    }
+                                    else if (@SRF.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Notebook)
+                                    {
+                                        <p>Notebook</p>
+                                    }
+                                    else if (@SRF.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Desktop)
+                                    {
+                                        <p>Masaüstü</p>
+                                    }
+                                    else if (@SRF.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Tablet)
+                                    {
+                                        <p>Tablet</p>
+                                    }
+                                    else if (@SRF.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Other)
+                                    {
+                                        <p>Diğer</p>
+                                    }
+                                </td>
+                                <td>
+                                    @SRF.product.PBrand
+                                </td>
+                                <td id="supplier">
+                                    <a href="/Supplier/Index" id="suppliername">
+                                        <strong>
+                                            @SRF.SupplierName
+                                        </strong>
+                                    </a>
+                                </td>
+                                <td>
+                                    @if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.SFRNew)
+                                    {
+                                        <p>Yeni gelen</p>
+                                    }
+                                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.Repair)
+                                    {
+                                        <p>TAMİR EDİLDİ</p>
+                                    }
+                                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.Waiting)
+                                    {
+                                        <p>Onay Bekliyor</p>
+                                    }
+                                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.Item)
+                                    {
+                                        <p>Parça Bekliyor</p>
+                                    }
+                                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.Completed)
+                                    {
+                                        <p> TAMAMLANDI </p>
+                                    }
+                                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.Suppliers)
+                                    {
+                                        <p> Tedarikçide </p>
+                                    }
+                                    else if (@SRF.SFRState == TeknikServisYazılım.Entity.EnumProductState.Approved)
+                                    {
+                                        <p> Onaylandı </p>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("SRFEdit", "Admin", new { SRF.Id, SRF.CustomerId, SRF.ProductId, SRF.SellproductId })" class="btn btn-danger btn-outline-info btn-sm">
+                                        Tamire al
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("SRFPrint", "Admin", new { SRF.Id, SRF.CustomerId, SRF.ProductId, SRF.SellproductId })" class="btn btn-outline-info btn-sm" target="_blank">
+                                        Yazdır
+                                    </a>
+                                </td>
+
+                                <td>
+                                    @SRF.Price
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("SRFDelete", "Admin", new { id = SRF.Id })" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            }
+
+                        }
+
+
+                    </tbody>
+                </table>
+                <!--end: Datatable -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/default/assets/demo/default/custom/components/datatables/base/html-table.js" type="text/javascript"></script>*@

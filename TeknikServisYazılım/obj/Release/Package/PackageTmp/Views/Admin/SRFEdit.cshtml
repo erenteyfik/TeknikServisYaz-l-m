@@ -1,0 +1,548 @@
+﻿@model TeknikServisYazılım.Entity.ServiceRegistrationForm
+@{
+    ViewBag.Title = "SRFEdit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    #displayname {
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    #displaynamerow {
+        font-size: 15px;
+        font-weight: 700;
+        margin-top: 6px;
+    }
+
+    #displayhead {
+        text-align: center;
+    }
+
+    #displayseparator {
+        margin-top: -5px;
+    }
+
+    #displayrow {
+        margin-top: -10px;
+    }
+
+    #dropdowncss {
+        /*border: 1px solid #000000;
+        border-radius: 3px;
+        padding: 3px;
+        color:black;
+        background-color:blue;*/
+    }
+</style>
+<div class="container">
+    <div class="row" style="width:1201px">
+        <div class="m-grid__item m-grid__item--fluid m-wrapper" id="div-enter" style="width:1199px">
+            <!-- BEGIN: Subheader -->
+            <div class="m-subheader ">
+                <div class="d-flex align-items-center">
+                    <div class="mr-auto">
+                        <h3 class="m-subheader__title m-subheader__title--separator">
+                            SERVİS TAMİR FORMU
+                        </h3>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="m-content">
+                <div class="m-portlet m-portlet--tab">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+                                <h3 class="m-portlet__head-text">
+                                    SERVİS TAMİR FORMU
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--begin::Form-->
+
+                    @using (Html.BeginForm("SRFEdit", "Admin", null, FormMethod.Post, new { @class = "m-form m-form--fit m-form--label-align-right", @id = "m_form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.CustomerId)
+                        @Html.HiddenFor(model => model.ProductId)
+                        @Html.HiddenFor(model => model.SellproductId)
+
+                        @Html.HiddenFor(model => model.Active)
+                        @Html.HiddenFor(model => model.PaymentCheck)
+                        @Html.HiddenFor(model => model.SRFArrivalDatetime)
+                        @Html.HiddenFor(model => model.SRFWhoUser)
+                        @Html.HiddenFor(model => model.KimeAit)
+                        @Html.HiddenFor(model => model.KimeDevretti)
+
+
+
+                        @Html.HiddenFor(model => model.product.ProductType)
+                        @Html.HiddenFor(model => model.product.PBrand)
+                        @Html.HiddenFor(model => model.product.PModel)
+                        @Html.HiddenFor(model => model.product.PFaultrecord)
+                        @Html.HiddenFor(model => model.product.PFaultpersonel)
+                        @Html.HiddenFor(model => model.product.PSerialNumber)
+                        @Html.HiddenFor(model => model.product.PBatterySerialNumber)
+                        @Html.HiddenFor(model => model.product.Id)
+                        @Html.HiddenFor(model => model.product.PBattery)
+                        @Html.HiddenFor(model => model.product.PChanger)
+
+                        @Html.HiddenFor(model => model.customer.Id)
+
+
+                        @Html.HiddenFor(model => model.sellproduct.Id)
+                        @Html.HiddenFor(model => model.sellproduct.SBrand)
+                        @Html.HiddenFor(model => model.sellproduct.SModel)
+                        @Html.HiddenFor(model => model.sellproduct.Stock)
+                        @Html.HiddenFor(model => model.sellproduct.Price)
+
+                        @Html.HiddenFor(model => model.Supplier.Id)
+                        @Html.HiddenFor(model => model.Supplier.Phone)
+                        @Html.HiddenFor(model => model.Supplier.Address)
+
+
+
+
+
+                        <div class="m-portlet__body">
+                            <div class="form-group m-form__group m--margin-top-10">
+                                <div class="alert m-alert m-alert--default" role="alert">
+                                    Bu listeden tamir edilecek ürünle ilgili işlemler yapılacak.
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="m-form__heading">
+                                        <h3 class="m-form__heading-title" id="displayhead">
+                                            Müşteri Bilgileri
+                                        </h3>
+                                    </div>
+                                    <div class="m-separator m-separator--dashed m-separator--lg" id="displayseparator"></div>
+
+                                    <div class="form-group m-form__group row" id="displayrow">
+                                        <label for="example-text-input" class="col-4">
+                                            Müşteri adı :
+                                        </label>
+                                        <div class="col-4" id="displayname">
+                                            @Html.TextBoxFor(model => model.customer.UserName, new { @class = "form-control m-input",@style="width:300px;font-weight:700" })
+
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row" id="displayrow">
+                                        <label for="example-text-input" class="col-4">
+                                            Telefon :
+                                        </label>
+                                        <div class="col-4" id="displayname">
+                                            @Html.TextBoxFor(model => model.customer.Phone, new { @class = "form-control m-input", @style = "width:300px;font-weight:700" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row" id="displayrow">
+                                        <label for="example-text-input" class="col-4">
+                                            Email :
+                                        </label>
+                                        <div class="col-4" id="displayname">
+                                            @Html.TextBoxFor(model => model.customer.Email, new { @class = "form-control m-input", @style = "width:300px;font-weight:700"})
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group m-form__group row" id="displayrow" style="margin-top:64px">
+                                        <label for="example-text-input" class="col-4">
+                                            Sorumlu Kişi:
+                                        </label>
+                                        <div class="col-4" id="displayname">
+                                            @Html.DisplayFor(model => model.KimeAit, new { @class = "form-control m-input" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row" id="displayrow" style="">
+                                        <label for="example-text-input" class="col-4">
+                                            Devrettiği Kişi :
+                                        </label>
+                                        <div class="col-4" id="displayname">
+
+                                            @Html.DisplayFor(model => model.KimeDevretti, new { @class = "form-control m-input" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="m-form__heading" id="displayhead">
+                                        <h3 class="m-form__heading-title">
+                                            Ürün Bilgileri
+                                        </h3>
+                                    </div>
+                                    <div class="m-separator m-separator--dashed m-separator--lg" id="displayseparator"></div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group m-form__group row" id="displayrow">
+                                                <label for="example-text-input" class="col-6 col-form-label">
+                                                    Ürün adı :
+                                                </label>
+                                                <div class="col-6" id="displaynamerow" style="font-size:14px">
+                                                    @if (Model.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Phone)
+                                                    {
+                                                        <p>Cep Telefonu</p>
+                                                    }
+                                                    else if (Model.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Notebook)
+                                                    {
+                                                        <p>Notebook</p>
+                                                    }
+                                                    else if (Model.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Desktop)
+                                                    {
+                                                        <p>Masaüstü</p>
+                                                    }
+                                                    else if (Model.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Tablet)
+                                                    {
+                                                        <p>Tablet</p>
+                                                    }
+                                                    else if (Model.product.ProductType == TeknikServisYazılım.Entity.EnumProductType.Other)
+                                                    {
+                                                        <p>Diğer</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row" id="displayrow">
+                                                <label for="example-text-input" class="col-6 col-form-label">
+                                                    Markası :
+                                                </label>
+                                                <div class="col-6" id="displaynamerow">
+                                                    @Html.DisplayFor(model => model.product.PBrand, new { @class = "form-control m-input" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row" id="displayrow">
+                                                <label for="example-text-input" class="col-6 col-form-label">
+                                                    Modeli :
+                                                </label>
+                                                <div class="col-6" id="displaynamerow">
+                                                    @Html.DisplayFor(model => model.product.PModel, new { @class = "form-control m-input" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row" id="displayrow">
+                                                <label for="example-text-input" class="col-6 col-form-label">
+                                                    Seri No :
+                                                </label>
+                                                <div class="col-6" id="displaynamerow">
+                                                    @Html.DisplayFor(model => model.product.PSerialNumber, new { @class = "form-control m-input" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+
+
+                                            <div class="form-group m-form__group row" id="displayrow">
+                                                <label for="example-text-input" class="col-6 col-form-label">
+                                                    Batarya <br /> Seri No :
+                                                </label>
+                                                <div class="col-6" id="displaynamerow">
+                                                    @Html.DisplayFor(model => model.product.PBatterySerialNumber, new { @class = "form-control m-input" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row" id="displayrow">
+                                                <label for="example-text-input" class="col-6 col-form-label">
+                                                    EkParçalar:
+                                                </label>
+                                                <div class="col-6" id="displaynamerow">
+                                                    @Html.DisplayFor(model => model.product.Ekparcalar, new { @class = "form-control m-input" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row" id="displayrow">
+                                                <label for="example-text-input" class="col-6 col-form-label">
+                                                    Batarya :
+                                                </label>
+                                                <div class="col-6" id="displaynamerow">
+                                                    @if (Model.product.PBattery == true)
+                                                    {
+                                                        <p>Alındı</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>Alınmadı</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row" id="displayrow">
+                                                <label for="example-text-input" class="col-6 col-form-label">
+                                                    Sarj :
+                                                </label>
+                                                <div class="col-6" id="displaynamerow">
+                                                    @if (Model.product.PChanger == true)
+                                                    {
+                                                        <p>Alındı</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>Alınmadı</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row" id="displayrow">
+
+                                        <label for="example-text-input" class="col-7 col-form-label" style="margin-left:-198px;">
+                                            Müşterinin Bildirdiği Arıza :
+                                        </label>
+                                        <div class="col-7" id="displaynamerow" style="background-color:red;color:white">
+                                            @Html.DisplayFor(model => model.product.PFaultrecord, new { @class = "form-control m-input" })
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group m-form__group row" id="displayrow">
+
+                                        <label for="example-text-input" class="col-7 col-form-label" style="margin-left:-198px;">
+                                            Cihazın Mevcut Durumu:
+                                        </label>
+                                        <div class="col-7" id="displaynamerow" style="background-color:blue;color:white">
+                                            @Html.DisplayFor(model => model.product.PFaultpersonel, new { @class = "form-control m-input" })
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                            <div class="container" style="padding:10px 10px">
+                                <div class="row">
+                                    <div class="m-form__group-sub col-md-4">
+                                        <div class="form-group m-form__group row">
+                                            <label for="example-text-input" class="col-5">
+                                                Değişen parça:
+                                            </label>
+                                            <div class="col-7">
+                                                @Html.DropDownListFor(model => model.sellproduct.SName, new SelectList(Model.Sproducts, "Id", "SName", Model.SellproductId), new { @class = "form-control m-input", @id = "dropdowncss" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="m-form__group-sub col-md-4" style="margin-left:-60px">
+                                        <div class="form-group m-form__group row">
+                                            <label for="example-text-input" class="col-4">
+                                                Adet:
+                                            </label>
+                                            <div class="col-4">
+                                                @Html.TextBoxFor(model => model.sellproduct.SNumber, new { @class = "form-control m-input", @placeholder = "Adet", @type = "number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="m-form__group-sub col-md-4" style="margin-left:-130px">
+                                        <div class="form-group m-form__group row">
+                                            <label for="example-text-input" class="col-4">
+                                                Dış Servis:
+                                            </label>
+                                            <div class="col-8">
+                                                @Html.DropDownListFor(model => model.SuppliersId, new SelectList(Model.Suppliers, "Id", "Name", Model.SuppliersId), new { @class = "form-control m-input" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top:30px;">
+                                    <div class="m-form__group-sub col-md-4">
+                                        <div class="form-group m-form__group row">
+                                            <label for="example-text-input" class="col-4">
+                                                Durum:
+                                            </label>
+                                            <div class="col-8" style="margin-top:-5px">
+                                                @Html.EnumDropDownListFor(i => i.SFRState, new { @class = "form-control m-input" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="m-form__group-sub col-md-4" style="margin-left:-115px">
+                                        <div class="form-group m-form__group row">
+                                            <label for="example-text-input" class="col-6">
+                                                Tamir Ücreti :
+                                            </label>
+                                            <div class="col-4">
+                                                @Html.TextBoxFor(model => model.Price, new { @class = "form-control m-input", @type = "number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top:30px">
+                                    <div class="m-form__group-sub col-md-4" style="">
+                                        <div class="form-group m-form__group row">
+                                            <label for="example-text-input" class="col-6">
+                                                Devrettiği Kişi:
+                                            </label>
+                                            <div class="col-6">
+                                                @Html.DropDownListFor(model => model.KimeDevrettiControl, new SelectList(Model.TransferUserS, "Id", "UserName"), new { @class = "form-control m-input" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="m-form__group-sub col-md-4">
+                                        <div class="row">
+
+                                            <div class="col-xl-6" style="margin-left:-40px">
+                                                <label class="m-checkbox m-checkbox--solid m-checkbox--brand">
+                                                    @Html.CheckBoxFor(model => model.SRFDevrettiUser, new { @class = "form-control m-input", @type = "checkbox" })
+                                                    DEVRET
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group m-form__group row" style="margin-top:30px">
+                                    <label for="example-text-input" class="col-2" style="margin-left:-46px">
+                                        Servis Notu:
+                                    </label>
+                                    <div class="col-8">
+                                        @Html.TextAreaFor(model => model.sellproduct.Description, new { @class = "form-control m-input", @rows = 5, @placeholder = "" })
+                                        <span class="m-form__help">
+                                            Örn : Ekran değişti, tamir edildi, tedarikçiye yollandı vs
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group m-form__group row" style="margin-top:30px">
+                                    <label for="example-text-input" class="col-2" style="margin-left:-46px;font-size:20px;font-weight:800">
+                                        DİKKAT!
+                                    </label>
+                                    <label class="col-10" style="margin-left:-80px;font-size:20px;font-weight:800">
+                                        BU FORMDA İLK KAYDET İŞLEMİ YAPAN KULLANICI! ÜRÜNÜN SORUMLULUĞUNU ALIR.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+                        <div class="m-portlet__foot m-portlet__foot--fit">
+                            <div class="m-form__actions">
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-10">
+                                        <button type="submit" class="btn btn-primary">
+                                            Kaydet
+                                        </button>
+                                        <button type="reset" class="btn btn-secondary">
+                                            İptal Et
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row" style="width:1200px">
+        <div class="m-grid__item m-grid__item--fluid m-wrapper">
+            <!-- BEGIN: Subheader -->
+            <div class="m-subheader ">
+                <div class="d-flex align-items-center">
+                    <div class="mr-auto">
+                        <h3 class="m-subheader__title m-subheader__title--separator">
+                            Loglar
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Subheader -->
+            <div class="m-content">
+                <div class="m-alert m-alert--icon m-alert--air m-alert--square alert alert-dismissible m--margin-bottom-30" role="alert">
+                    <div class="m-alert__icon">
+                        <i class="flaticon-exclamation m--font-brand"></i>
+                    </div>
+                    <div class="m-alert__text">
+                        Bu menüden logları listeleyebilirsiniz. (En son tarihe göre listelenir)
+                    </div>
+                </div>
+                <div class="m-portlet m-portlet--mobile">
+
+                    <div class="m-portlet__body">
+                        <!--begin: Search Form -->
+                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                            <div class="row align-items-center">
+                                <div class="col-xl-8 order-2 order-xl-1">
+                                    <div class="form-group m-form__group row align-items-center">
+                                        <div class="col-md-4">
+                                            <div class="m-input-icon m-input-icon--left">
+                                                <input type="text" class="form-control m-input" placeholder="Search..." id="generalSearch">
+                                                <span class="m-input-icon__icon m-input-icon__icon--left">
+                                                    <span>
+                                                        <i class="la la-search"></i>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--end: Search Form -->
+                        <!--begin: Datatable -->
+                        <table class="m-datatable" id="html_table">
+                            <thead>
+                                <tr>
+                                    <th title="Field #1">
+                                        Log ID
+                                    </th>
+                                    <th title="Field #2">
+                                        Kullanan
+                                    </th>
+                                    <th title="Field #3">
+                                        Log Açıklama
+                                    </th>
+                                    <th title="Field #6">
+                                        Tarih
+                                    </th>
+                                    <th>Müşteri adı</th>
+                                    <th> Servis Form ID</th>
+                                    <th></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var TechnicalServiceForm in Model.TLogs)
+                                {
+                                    <tr>
+                                        <td>
+                                            @TechnicalServiceForm.Id
+                                        </td>
+                                        <td>
+                                            @TechnicalServiceForm.LogWho
+                                        </td>
+                                        <td>
+                                            @TechnicalServiceForm.LogDescription
+                                        </td>
+                                        <td>
+                                            @TechnicalServiceForm.LogDatetime.ToString("MM-dd-yyyy HH:mm:ss")
+                                        </td>
+                                        <td>
+                                            @TechnicalServiceForm.LogWhichCustomer
+                                        </td>
+                                        <td>
+                                            @TechnicalServiceForm.ServiceRegistrationFormID
+                                        </td>
+
+                                        <td></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!--end: Datatable -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    #role-container {
+        margin-top: 50px;
+        margin-bottom: 100px;
+        background-color: white;
+        padding: 20px 20px
+    }
+
+    #role-name-td {
+        color: black;
+        font-size: 17px;
+    }
+</style>
+<div class="container" id="role-container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3>Roller</h3>
+            <a href="/Role/Create" class="btn btn-success">Role Ekle</a>
+            <hr />
+        </div>
+        <table class="table table-striped">
+            <tr>
+
+                <th>
+                    <h3 style="font-weight:700">
+                        Role Name
+                    </h3>
+
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td colspan="3">Role Yok</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var role in Model)
+                {
+                    <tr>
+                        <td id="role-name-td">
+                            @role.Name
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    @Html.ActionLink("Rol Ata", "Edit", new { id = role.Id }, new { @class = "btn btn-primary btn-sm" })
+                                </div>
+                                <div class="col-md-3">
+                                    @if (role.Name == "SuperAdmin" || role.Name == "Admin")
+                                    {
+                                        /**/
+                                    }
+                                    else
+                                    {
+                                        using (Html.BeginForm("Delete", "Role", new { id = role.Id }))
+                                        {
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash-o"></i>
+                                                Sil
+                                            </button>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
